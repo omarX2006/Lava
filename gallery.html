@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - StyleVault</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding-top: 110px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* NAVBAR STYLES */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+            z-index: 100;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 50px;
+            font-weight: bold;
+            padding: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a, .dropbtn {
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+            background: none;
+            cursor: pointer;
+            font-size: 20px;
+            border: none;
+        }
+
+        .nav-links a:hover, .dropbtn:hover {
+            color: red;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dropbtn i {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 28px;
+            left: 0;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0px 6px 12px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            z-index: 10;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 14px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: red;
+        }
+
+        .icons {
+            display: flex;
+            gap: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        .icons i:hover {
+            color: red;
+        }
+
+        /* GALLERY STYLES */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .gallery-header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* SEARCH BAR STYLES */
+        .search-container {
+            margin-bottom: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-input {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: red;
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: white;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:hover,
+        .filter-select:focus {
+            border-color: red;
+            outline: none;
+        }
+
+        /* PRODUCTS GRID */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .stars {
+            color: #ffc107;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .original-price {
+            font-size: 16px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background: red;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .sale-badge {
+            background: #28a745;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .new-badge {
+            background: #007bff;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: red;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 20px;
+            color: #999;
+        }
+
+        /* FOOTER STYLES */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 60px 20px 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-content h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: red;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 10px;
+        }
+
+        footer li a {
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font-weight: 500;
+            background: none;
+            cursor: pointer;
+            font-size: 17px;
+            border: none;
+        }
+
+        footer li a:hover {
+            color: red;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 18px 20px;
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                font-size: 30px;
+                padding: 10px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .nav-links a, .dropbtn {
+                font-size: 14px;
+            }
+
+            .icons {
+                gap: 20px;
+                padding: 10px;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-input,
+            .filter-select {
+                max-width: 100%;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+
+            .product-image {
+                height: 250px;
+            }
+
+            .gallery-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER/NAVBAR -->
+    <header class="navbar">
+        <div class="logo">Lava</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown()">
+                    Products <i class="fas fa-chevron-down" id="arrowIcon"></i>
+                </button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="#">Men</a>
+                    <a href="#">Women</a>
+                    <a href="#">Kids</a>
+                    <a href="#">Accessories</a>
+                </div>
+            </div>
+            <a href="#">Contact</a>
+        </nav>
+        <div class="icons">
+            <i class="fas fa-search"></i>
+            <i class="far fa-user"></i>
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="gallery-container">
+        <div class="gallery-header">
+            <h1>StyleVault Gallery</h1>
+            <p>Discover our latest collection of premium fashion</p>
+        </div>
+
+        <!-- SEARCH AND FILTER -->
+        <div class="search-container">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="Search products..."
+            >
+            <select id="categoryFilter" class="filter-select">
+                <option value="">All Categories</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+                <option value="Accessories">Accessories</option>
+            </select>
+        </div>
+
+        <!-- PRODUCTS GRID -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+
+        <!-- NO RESULTS MESSAGE -->
+        <div id="noResults" class="no-results" style="display: none;">
+            No products found. Try adjusting your search.
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>StyleVault</h3>
+                <p>We provide unforgettable wearing experiences with premium service and unbeatable prices.</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Contact</a></li><!-- Changed "Gallery" to "Contact" -->
+            <li><a href="search.html">Search Places</a></li>
+            <li><a href="book.html">Shipping Policy</a></li><!-- Changed "Book Now" to "Shipping Policy" -->
+            <li><a href="/ـJana/project ieee/login.html">Log in</a></li>
+            <li><a href="about_us.html">About Us</a></li>
+            </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: info@stylevault.com</p>
+                <p>Phone: +20 101 828 6842</p>
+                <p>Address: 123 Fashion Lane, Style City</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 StyleVault. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JSON Data (embedded)
+        const productsData = {
+            "products": [
+                {
+                    "id": "PRD-001",
+                    "name": "Classic White Oxford Shirt",
+                    "category": "Men",
+                    "price": 49.99,
+                    "originalPrice": 69.99,
+                    "discount": 28,
+                    "rating": 4.7,
+                    "reviewsCount": 312,
+                    "tags": ["Best Seller", "New Arrival"],
+                    "isNew": true,
+                    "isSale": true,
+                    "description": "A timeless white oxford shirt crafted from 100% premium Egyptian cotton.",
+                    "image": "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600"
+                },
+                {
+                    "id": "PRD-002",
+                    "name": "Floral Wrap Midi Dress",
+                    "category": "Women",
+                    "price": 74.99,
+                    "originalPrice": 74.99,
+                    "discount": 0,
+                    "rating": 4.8,
+                    "reviewsCount": 198,
+                    "tags": ["Trending", "New Arrival"],
+                    "isNew": true,
+                    "isSale": false,
+                    "description": "An elegant wrap-style midi dress featuring a vibrant floral print.",
+                    "image": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600"
+                },
+                {
+                    "id": "PRD-003",
+                    "name": "Slim Fit Dark Denim Jeans",
+                    "category": "Men",
+                    "price": 89.99,
+                    "originalPrice": 110.00,
+                    "discount": 18,
+                    "rating": 4.6,
+                    "reviewsCount": 450,
+                    "tags": ["Best Seller"],
+                    "isNew": false,
+                    "isSale": true,
+                    "description": "Premium slim fit dark wash jeans made from stretch denim.",
+                    "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600"
+                },
+                {
+                    "id": "PRD-004",
+                    "name": "Oversized Pastel Hoodie",
+                    "category": "Women",
+                    "price": 59.99,
+                    "originalPrice": 59.99,
+                    "discount": 0,
+                    "rating": 4.9,
+                    "reviewsCount": 534,
+                    "tags": ["Best Seller", "Trending"],
+                    "isNew": false,
+                    "isSale": false,
+                    "description": "Ultra-soft oversized hoodie in a beautiful pastel palette.",
+                    "image": "https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600"
+                },
+                {
+                    "id": "PRD-005",
+                    "name": "Kids Rainbow Graphic Tee",
+                    "category": "Kids",
+                    "price": 24.99,
+                    "originalPrice": 29.99,
+                    "discount": 17,
+                    "rating": 4.8,
+                    "reviewsCount": 289,
+                    "tags": ["New Arrival", "Eco-Friendly", "Sale"],
+                    "isNew": true,
+                    "isSale": true,
+                    "description": "A fun and colorful graphic t-shirt for kids with vibrant rainbow print.",
+                    "image": "https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=600"
+                },
+                {
+                    "id": "PRD-006",
+                    "name": "Leather Crossbody Bag",
+                    "category": "Accessories",
+                    "price": 129.99,
+                    "originalPrice": 169.99,
+                    "discount": 23,
+                    "rating": 4.7,
+                    "reviewsCount": 176,
+                    "tags": ["Exclusive", "Sale"],
+                    "isNew": false,
+                    "isSale": true,
+                    "description": "A sophisticated genuine leather crossbody bag with adjustable strap.",
+                    "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600"
+                },
+                {
+                    "id": "PRD-007",
+                    "name": "Men's Tailored Blazer",
+                    "category": "Men",
+                    "price": 149.99,
+                    "originalPrice": 149.99,
+                    "discount": 0,
+                    "rating": 4.5,
+                    "reviewsCount": 143,
+                    "tags": ["Exclusive", "Limited Edition"],
+                    "isNew": false,
+                    "isSale": false,
+                    "description": "A sharp, modern tailored blazer perfect for the office or evening.",
+                    "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600"
+                },
+                {
+                    "id": "PRD-008",
+                    "name": "High-Waist Yoga Leggings",
+                    "category": "Women",
+                    "price": 44.99,
+                    "originalPrice": 54.99,
+                    "discount": 18,
+                    "rating": 4.9,
+                    "reviewsCount": 671,
+                    "tags": ["Best Seller", "Sale", "Trending"],
+                    "isNew": false,
+                    "isSale": true,
+                    "description": "High-performance high-waist leggings with 4-way stretch fabric.",
+                    "image": "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600"
+                },
+                {
+                    "id": "PRD-009",
+                    "name": "Kids Puffer Jacket",
+                    "category": "Kids",
+                    "price": 54.99,
+                    "originalPrice": 54.99,
+                    "discount": 0,
+                    "rating": 4.7,
+                    "reviewsCount": 215,
+                    "tags": ["New Arrival"],
+                    "isNew": true,
+                    "isSale": false,
+                    "description": "A warm and lightweight puffer jacket with water-resistant shell.",
+                    "image": "https://images.unsplash.com/photo-1539533057867-335ddca3e4b5?w=600"
+                }
+            ]
+        };
+
+        let filteredProducts = [...productsData.products];
+
+        // Toggle Dropdown Menu
+        function toggleDropdown() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const arrowIcon = document.getElementById('arrowIcon');
+            dropdownMenu.classList.toggle('show');
+            arrowIcon.classList.toggle('rotate');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropdown = document.querySelector('.dropdown');
+            if (!dropdown.contains(e.target)) {
+                document.getElementById('dropdownMenu').classList.remove('show');
+                document.getElementById('arrowIcon').classList.remove('rotate');
+            }
+        });
+
+        // Render Products
+                // Render Products
+        function renderProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            const noResults = document.getElementById('noResults');
+
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            productsGrid.innerHTML = filteredProducts.map(product => {
+                const stars = '⭐'.repeat(Math.floor(product.rating));
+                return `
+                    <a href="./product.html" class="product-card-link">
+                        <div class="product-card">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                            <div class="product-info">
+                                <div class="product-category">${product.category}</div>
+                                <div class="product-name">${product.name}</div>
+                                <div class="product-description">${product.description}</div>
+                                <div class="product-rating">
+                                    <span class="stars">${stars}</span>
+                                    <span>(${product.reviewsCount} reviews)</span>
+                                </div>
+                                <div class="price-section">
+                                    <span class="product-price">$${product.price}</span>
+                                    ${product.originalPrice > product.price ? `<span class="original-price">$${product.originalPrice}</span>` : ''}
+                                    ${product.discount > 0 ? `<span class="discount-badge">-${product.discount}%</span>` : ''}
+                                    ${product.isSale ? `<span class="sale-badge">SALE</span>` : ''}
+                                    ${product.isNew ? `<span class="new-badge">NEW</span>` : ''}
+                                </div>
+                                <button class="add-to-cart-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        // Filter and Search
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.getElementById('categoryFilter').value;
+
+            filteredProducts = productsData.products.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
+                                    product.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === '' || product.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            renderProducts();
+        }
+
+        // Event Listeners
+        document.getElementById('searchInput').addEventListener('input', filterProducts);
+        document.getElementById('categoryFilter').addEventListener('change', filterProducts);
+
+        // Initial Render
+        renderProducts();
+    </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lava | تفاصيل المنتج</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Lava</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown()">
+                    Products <i class="fas fa-chevron-down" id="arrowIcon"></i>
+                </button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="./product.html">Hoodies</a>
+                    <a href="./product.html">T-Shirts</a>
+                    <a href="./product.html">Pants</a>
+                    <a href="./product.html">Accessories</a>
+                </div>
+            </div>
+            <a href="./about_us.html">About Us</a>
+        </nav>
+        <div class="icons">
+            <a href="./search.html"><i class="fas fa-search" ></i></a>
+            <a href="./ـJana/project ieee/login.html"><i class="far fa-user" ></i></a>
+            <a href="./cart.html"><i class="fas fa-shopping-cart" ></i></a>
+        </div>
+    </header>
+
+    <main class="product-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a>
+                 / <a href="#">Hoodies</a>
+                  / <span>LAVA BLING BLING HOODIE</span>
+            </nav>
+
+            <div class="product-details">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" 
+                        alt="LAVA HOODIE" id="mainImage">
+                    </div>
+                    <div class="thumbnail-list">
+                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=200"
+                         class="thumbnail active" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=200"
+                         class="thumbnail" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1551029506-0807df4e203b?w=200"
+                         class="thumbnail" onclick="changeImage(this)">
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <span class="preorder-badge">📦 PRE-ORDER</span>
+                    <h1 class="product-title">LAVA BLING BLING HOODIE DROP</h1>
+                    
+                    <div class="product-price">
+                        <span class="current-price">LE 980 EGP</span>
+                        <span class="old-price">LE 1,200 EGP</span>
+                        <span class="discount">-18%</span>
+                    </div>
+
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-text">4.5 (42 reviews)</span>
+                    </div>
+
+                    <div class="gender-badge">
+                        <span class="gender-tag men-tag"><i class="fas fa-mars"></i> Men</span>
+                        <span class="gender-tag women-tag"><i class="fas fa-venus"></i> Women</span>
+                        <span class="gender-tag unisex-tag"><i class="fas fa-venus-mars"></i> Unisex</span>
+                    </div>
+
+                    <div class="product-options">
+                        <label>SIZE</label>
+                        <div class="size-options">
+                            <button class="size-btn active" onclick="selectSize(this)">S</button>
+                            <button class="size-btn" onclick="selectSize(this)">M</button>
+                            <button class="size-btn" onclick="selectSize(this)">L</button>
+                            <button class="size-btn" onclick="selectSize(this)">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="product-options">
+                        <label>COLOR</label>
+                        <div class="color-options">
+                            <span class="color-circle black active" onclick="selectColor(this)"></span>
+                            <span class="color-circle white" onclick="selectColor(this)"></span>
+                            <span class="color-circle gray" onclick="selectColor(this)"></span>
+                        </div>
+                    </div>
+
+                    <div class="product-quantity">
+                        <label>Quantity</label>
+                        <div class="quantity-control">
+                            <button onclick="decreaseQty()">-</button>
+                            <input type="number" id="quantity" value="1" min="1">
+                            <button onclick="increaseQty()">+</button>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn btn-primary" onclick="addToCart()">ADD TO CART</button>
+                        <button class="btn btn-secondary" onclick="buyNow()">BUY IT NOW</button>
+                    </div>
+
+                    <div class="secure-checkout">
+                        <p>Secure Checkout With</p>
+                        <div class="payment-methods">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-tabs">
+                <div class="tabs-header">
+                    <button class="tab-link active" onclick="openTab(event, 'desc')">Description</button>
+                    <button class="tab-link" onclick="openTab(event, 'size')">Size Chart</button>
+                    <button class="tab-link" onclick="openTab(event, 'reviews')">Reviews</button>
+                </div>
+                <div class="tab-content">
+                    <div id="desc" class="tab-pane active">
+                        <p>Premium quality hoodie with bling print. 100% cotton. Oversized fit.</p>
+                    </div>
+                    <div id="size" class="tab-pane">
+                        <table class="size-table">
+                            <tr><th>Size</th><th>Chest</th><th>Length</th></tr>
+                            <tr><td>S</td><td>104cm</td><td>68cm</td></tr>
+                            <tr><td>M</td><td>110cm</td><td>70cm</td></tr>
+                            <tr><td>L</td><td>116cm</td><td>72cm</td></tr>
+                            <tr><td>XL</td><td>122cm</td><td>74cm</td></tr>
+                        </table>
+                    </div>
+                    <div id="reviews" class="tab-pane">
+                        <div class="reviews-summary">
+                            <div class="average-rating">4.5</div>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>Based on 42 reviews</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<section class="related-products">
+    <h2>You may also like</h2>
+    <div class="product-grid">
+        <div class="product-card" onclick="loadProduct('asili')">
+            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=200" alt="ASILI HOODIE">
+            <h3>ASILI HOODIE</h3>
+            <p class="price">LE 980</p>
+        </div>
+        <div class="product-card" onclick="loadProduct('puffed')">
+            <img src="https://images.unsplash.com/photo-1551029506-0807df4e203b?w=200" alt="PUFFED SET">
+            <h3>PUFFED SET</h3>
+            <p class="price">LE 1,830</p>
+        </div>
+        <div class="product-card" onclick="loadProduct('mama')">
+            <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=200" alt="MAMA HOODIE">
+            <h3>MAMA HOODIE</h3>
+            <p class="price">LE 950</p>
+        </div>
+    </div>
+</section>
+        </div>
+    </main>
+
+        <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+        <div class="footer-about">
+            <h3>Lava</h3>
+            <p>We provide unforgettable wearing experiences with premium service and unbeatable prices.</p>
+        </div>
+        
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Contact</a></li><!-- Changed "Gallery" to "Contact" -->
+            <li><a href="search.html">Search Places</a></li>
+            <li><a href="book.html">Shipping Policy</a></li><!-- Changed "Book Now" to "Shipping Policy" -->
+            <li><a href="/ـJana/project ieee/login.html">Log in</a></li>
+            <li><a href="about_us.html">About Us</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>Email: info@lava.eg.com</p>
+            <p>Phone: +20 101 828 6842</p>
+            <p>Address: 123 Travel Lane, Tourism City</p>
+        </div>
+        </div>
+        
+        <div class="footer-bottom">
+        <p>&copy; 2025 Lava.eg . All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="product.js"></script>
+</body>
+</html>

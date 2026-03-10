@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+<header class="navbar">
+        <div class="logo">Lava</div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown()">
+                    Products <i class="fas fa-chevron-down" id="arrowIcon"></i>
+                </button>
+                <div class="dropdown-content" id="dropdownMenu">
+                    <a href="#">Hoodies</a>
+                    <a href="#">T-Shirts</a>
+                    <a href="#">Pants</a>
+                    <a href="#">Accessories</a>
+                </div>
+            </div>
+            <a href="./about_us.html">About Us</a>
+        </nav>
+        <div class="icons">
+            <a href="./search.html"><i class="fas fa-search" ></i></a>
+            <a href="./ـJana/project ieee/login.html"><i class="far fa-user" ></i></a>
+            <a href="./cart.html"><i class="fas fa-shopping-cart" ></i></a>
+        </div>
+    </header>
+
+<main class="product-page">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">Home</a>
+                / <a href="#">Hoodies</a>
+                / <span>LAVA BLING BLING HOODIE</span>
+        </nav>
+<div class="checkout-container">
+
+    
+    <div class="left">
+        <h2>Billing Details</h2>
+
+        <form id="checkoutForm">
+
+            <input type="text" id="fname" placeholder="First Name">
+            <input type="text" id="lname" placeholder="Last Name">
+            <input type="text" id="address" placeholder="Address">
+            <input type="text" id="town" placeholder="Town / City">
+            <input type="text" id="zipcode" placeholder="ZIP Code">
+            <input type="text" id="phone" placeholder="Phone">
+            <input type="text" id="email" placeholder="Email">
+
+            <button type="button" id="placeOrder">
+                Place Order
+            </button>
+
+        </form>
+    </div>
+
+    <div class="right">
+
+        <h3>Your Order</h3>
+
+        <ul id="orderItems"></ul>
+
+        <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">€0.00</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Shipping</span>
+            <span id="shipping">€30.00</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Tax (3%)</span>
+            <span id="tax">€0.00</span>
+        </div>
+
+        <div class="summary-row total">
+            <span>Total</span>
+            <span id="total">€0.00</span>
+        </div>
+
+    </div>
+
+</div>
+    </div>
+</main>
+      <footer>
+    <div class="footer-content">
+      <div class="footer-about">
+        <h3>Lava</h3>
+        <p>We provide unforgettable wearing experiences with premium service and unbeatable prices.</p>
+      </div>
+      
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Contact</a></li><!-- Changed "Gallery" to "Contact" -->
+            <li><a href="search.html">Search Places</a></li>
+            <li><a href="book.html">Shipping Policy</a></li><!-- Changed "Book Now" to "Shipping Policy" -->
+            <li><a href="/ـJana/project ieee/login.html">Log in</a></li>
+            <li><a href="about_us.html">About Us</a></li>
+            </ul>
+      </div>
+      
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: info@lava.eg.com</p>
+        <p>Phone: +20 101 828 6842</p>
+        <p>Address: 123 Travel Lane, Tourism City</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Lava.eg . All rights reserved.</p>
+    </div>
+  </footer>
+
+<script src="checkout.js"></script>
+
+<script src="product.js"></script>
+</body>
+</html>
